@@ -1,5 +1,8 @@
 FROM golang:alpine
 
+# Forces git clone to ignore unknown host
+ENV GIT_SSH_COMMAND='ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'
+
 # Installs dependencies from alpine's repository
 RUN apk --no-cache upgrade && \
     apk --no-cache add tzdata ca-certificates \ 
@@ -17,6 +20,9 @@ ENV PATH $PATH:/usr/local/google-cloud-sdk/bin
 # Installs golang tools
 RUN go get -v -u github.com/golang/dep/cmd/dep && \
     go get -v -u golang.org/x/lint/golint
+
+# Sets default timezone
+RUN echo "America/Sao_Paulo" > /etc/timezone
 
 # Cleanup
 RUN rm -rf /tmp/*
