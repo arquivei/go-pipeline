@@ -22,7 +22,7 @@ RUN go get -v -u github.com/golang/dep/cmd/dep && \
 RUN rm -rf /tmp/*
 
 # Copy utility script to work with go in the bitbucket's pipeline
-COPY bitbucket-pipelines-go.sh /bitbucket-pipelines-go.sh
+COPY fix-repo-location.sh /fix-repo-location.sh 
 
 # Default command
 CMD ["bash"]
