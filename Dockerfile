@@ -28,7 +28,7 @@ RUN echo "America/Sao_Paulo" > /etc/timezone
 RUN rm -rf /tmp/*
 
 # Copy utility script to work with go in the bitbucket's pipeline
-COPY fix-repo-location.sh /fix-repo-location.sh 
+COPY *.sh /
 
 # Default command
 CMD ["bash"]
