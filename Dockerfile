@@ -7,7 +7,8 @@ ENV GIT_SSH_COMMAND='ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyCheckin
 RUN apk --no-cache upgrade && \
     apk --no-cache add tzdata ca-certificates \ 
     git mercurial gcc musl-dev openssh python \
-    py-pip curl bash make bc libxml2-dev openssl-dev
+    py-pip curl bash make bc libxml2-dev openssl-dev \
+    upx
 
 # Installs Amazon's client
 RUN pip install awscli
@@ -19,7 +20,8 @@ ENV PATH $PATH:/usr/local/google-cloud-sdk/bin
 
 # Installs golang tools
 RUN go get -v -u github.com/golang/dep/cmd/dep && \
-    go get -v -u golang.org/x/lint/golint
+    go get -v -u golang.org/x/lint/golint && \
+    go get -v -u bitbucket.org/liamstask/goose/cmd/goose
 
 # Sets default timezone
 RUN echo "America/Sao_Paulo" > /etc/timezone
