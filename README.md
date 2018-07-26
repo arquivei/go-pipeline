@@ -6,6 +6,11 @@ Is already has installed most our dependencies like libxml2 and openssl and make
 
 It's also shipped with aws and gcloud clients and some utility scripts.
 
+There are two tags available:
+
+  - `latest`: this is the image to be used for building stuff or executing tasks.
+  - `scratch`: this is a scratch image already configured with timezone and cacerts. This should be used to embbed statically linked binaries.
+
 ### Using this image
 
 If you are going to push the generated assets to aws or gcloud, run the appropriate scripts:
@@ -32,3 +37,10 @@ Then we must fix the location of the project. By default the pipeline puts the p
 Now you are all set to run your own commands like:
 
     $ make test publish
+
+### Available go binaries
+
+  - `dep`: For dependency manager
+  - `goose`: For managing SQL migrations
+  - `golint`: For linting go source code
+

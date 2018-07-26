@@ -32,5 +32,9 @@ RUN rm -rf /tmp/*
 # Copy utility script to work with go in the bitbucket's pipeline
 COPY *.sh /
 
+# This should be used to check if we are running our builds inside
+# a container of this image, so we know what tools are available
+ENV PIPELINE_ENABLED=1
+
 # Default command
 CMD ["bash"]
