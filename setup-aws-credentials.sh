@@ -37,6 +37,6 @@ echo "Switching AWS profile to '$1'..."
 export AWS_PROFILE=$1
 
 echo "Configuring docker credentials for ECR..."
-aws ecr get-login --no-include-email
+$(aws ecr get-login --no-include-email)
 
 return 0
