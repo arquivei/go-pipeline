@@ -21,7 +21,8 @@ ENV PATH $PATH:/usr/local/google-cloud-sdk/bin
 # Installs golang tools
 RUN go get -v -u github.com/golang/dep/cmd/dep && \
     go get -v -u golang.org/x/lint/golint && \
-    go get -v -u bitbucket.org/liamstask/goose/cmd/goose
+    go get -v -u bitbucket.org/liamstask/goose/cmd/goose && \
+	go get -v -u github.com/tebeka/go2xunit
 
 # Sets default timezone
 RUN echo "America/Sao_Paulo" > /etc/timezone

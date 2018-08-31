@@ -43,4 +43,12 @@ Now you are all set to run your own commands like:
   - `dep`: For dependency manager
   - `goose`: For managing SQL migrations
   - `golint`: For linting go source code
+  - `go2xunit`: For generating test results in xunit format
 
+### Extra programs
+
+Beyond compilers, make and default build tools and libraries we have:
+
+ - `upx`: For compressing the binaries
+ - `bc`: Used in some of our Makefiles to compute minimal code coverage
+ - `libxml2-dev`: For working with XMLs
