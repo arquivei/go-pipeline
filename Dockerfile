@@ -9,7 +9,7 @@ RUN apk --no-cache upgrade && \
     git mercurial gcc musl-dev openssh python \
     py-pip curl bash make bc libxml2-dev openssl-dev \
 	librdkafka-dev cyrus-sasl-dev lz4-dev \
-    upx
+    zip upx
 
 # Installs Amazon's client
 RUN pip install awscli
