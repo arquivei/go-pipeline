@@ -1,0 +1,52 @@
+#!/usr/bin/env bash
+
+# This script bumps the latest tag from a git repository that matches the given prefix. If no prefix is given, it will automatically generate one based on the current date.
+
+# Usage:
+
+# The most common case, wil be just call the script:
+# $ ./bump.sh
+# This will bump and apply the new tag.
+
+# Dry run mode can be activated by setting DRY_RUN=true:
+# DRY_RUN=true ./bump.sh
+
+# You can force a prefix by passing it as an argument
+# $ ./bump.sh CUSTOM
+# This will create a tag 'CUSTOM.0' in the fist time and bump it afterwards.
+
+
+# Sets unofficial Bash Strict Mode
+SOURCED=false && [ "$0" = "$BASH_SOURCE" ] || SOURCED=true
+if ! $SOURCED; then
+  # Enable strict mode
+  set -euo pipefail
+  IFS=$'\n\t'
+fi
+
+# Version prefix, defaults to current date using <YEAR><MONTH>
+PREFIX=${1:-`date +%y%m`}
+
+# Get last tag that maches prefix from git
+TAG=$(git for-each-ref \
+		  --sort='-version:refname' \
+		  --count=1 \
+		  --format='%(refname:short)' \
+		  "refs/tags/${PREFIX}.*"
+   )
+
+# Bump the last tag or creates a new tag ending in '.0' if no match was found
+if [[ -z "${TAG}" ]]; then
+	BUMPED="${PREFIX}.0"
+else
+	BUMPED=$(awk -F. '{$NF++;print}' OFS=. <<< "${TAG}")
+fi
+
+# Apply the new tag to git (or print it if in dry-run)
+if [[ "${DRY_RUN:-false}" == "false" ]]; then
+    git tag --annotate ${BUMPED} --message "Version bumped to ${BUMPED}"
+else
+	echo "This is a dry-run and no changes were really applied!!!"
+fi
+
+echo "Version bumped to ${BUMPED}"

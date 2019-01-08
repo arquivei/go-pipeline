@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+
+# This script tags and push a docker image to a remote URL.
+# Expected environment variables:
+#  IMAGE        The image as found at the local image repository.
+#  VERSION      The current image version.
+#  NEW_VERSION  Optional. This will tag the image with this new version.
+#  REMOTE_URL   The remote URL prefix (without the trailing slash).
+
+# Sets unofficial Bash Strict Mode
+SOURCED=false && [ "$0" = "$BASH_SOURCE" ] || SOURCED=true
+if ! $SOURCED; then
+  # Enable strict mode
+  set -euo pipefail
+  IFS=$'\n\t'
+fi
+
+NEW_VERSION=${NEW_VERSION:-${VERSION}}
+OLD_TAG=${IMAGE}:${VERSION}
+NEW_TAG=${REMOTE_URL}/${IMAGE}:${NEW_VERSION}
+
+docker tag ${OLD_TAG} ${NEW_TAG}
+docker push ${NEW_TAG}
+
+echo "Published ${NEW_TAG}"
