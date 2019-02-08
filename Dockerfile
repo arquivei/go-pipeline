@@ -23,7 +23,8 @@ ENV PATH $PATH:/usr/local/google-cloud-sdk/bin
 RUN go get -v -u github.com/golang/dep/cmd/dep && \
     go get -v -u golang.org/x/lint/golint && \
     go get -v -u bitbucket.org/liamstask/goose/cmd/goose && \
-	go get -v -u github.com/tebeka/go2xunit
+	go get -v -u github.com/tebeka/go2xunit && \
+	go get -v -u github.com/twitchtv/retool
 
 # Sets default timezone
 RUN echo "America/Sao_Paulo" > /etc/timezone
