@@ -1,5 +1,7 @@
 ### About
 
+> This repository was moved to https://bitbucket.org/arquivei/go-pipeline/
+
 This image is intended to be used in Bitbucket's pipelines for golang projects.
 
 Is already has installed most our dependencies like libxml2 and openssl and make.
